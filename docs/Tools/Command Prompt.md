@@ -2,7 +2,7 @@
 This section contains some of my favorite windows command prompt tools along with snippets of my favorite commands. 
 
 ## Pktmon
-Pktmon is a "Packet Monitor (Pktmon) is an in-box, cross-component network diagnostics tool for Windows. It can be used for packet capture..." Most people do not seem to know that since Windows 10/Windows 2016 there is a built-in utility to perform packet captures on a Windows Host. Previously you would need wireshark or another application. I still reccommend analyzing the traffic in wireshark.
+Pktmon or Packet Monitor "is an in-box, cross-component network diagnostics tool for Windows. It can be used for packet capture..." Most people do not seem to know that since Windows 10/Windows 2016 there is a built-in utility to perform packet captures on a Windows Host. Previously you would need wireshark or another application. I still reccommend analyzing the traffic in wireshark.
 
 For reference:
 [https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon](https://learn.microsoft.com/en-us/windows-server/networking/technologies/pktmon/pktmon)
@@ -56,4 +56,30 @@ Create a filter to capture ICMP traffic to 8.8.8.8.
 ```batch
 pktmon filter add -i 8.8.8.8 -t ICMP
 pktmon start --etw -m real-time
+```
+
+## net 
+
+The net command has several uses. 
+
+### net view
+One example is the net `net view` command for enumerating shares on a remote system. 
+This can be used by both a threat actor for [File and Directory Discovery](https://attack.mitre.org/techniques/T1083/).
+From a defensive perspective it can be useful to monitor for these commands or use them to discover file shares to understand
+where a threat actor may have moved laterally. 
+
+Enumerate shares on a remote system.
+```
+net view \\<computer or ip address>
+```
+
+Collect shared folder names in an array and print to console.
+```
+$sharedFolders = (NET.EXE VIEW \\<computer or ip address>) 
+$sharedFolders[7].split('  ')[0]
+```
+
+Print folder names to the console.
+```
+(net view \\<computer or ip address>) | % { if($_.IndexOf(' Disk ') -gt 0){ $_.Split('  ')[0] } }
 ```
