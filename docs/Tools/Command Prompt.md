@@ -69,17 +69,17 @@ From a defensive perspective it can be useful to monitor for these commands or u
 where a threat actor may have moved laterally. 
 
 Enumerate shares on a remote system.
-```
+```batch
 net view \\<computer or ip address>
 ```
 
 Collect shared folder names in an array and print to console.
-```
+```batch
 $sharedFolders = (NET.EXE VIEW \\<computer or ip address>) 
 $sharedFolders[7].split('  ')[0]
 ```
 
 Print folder names to the console.
-```
+```batch
 (net view \\<computer or ip address>) | % { if($_.IndexOf(' Disk ') -gt 0){ $_.Split('  ')[0] } }
 ```
