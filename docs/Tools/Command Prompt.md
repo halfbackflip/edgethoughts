@@ -60,7 +60,7 @@ pktmon start --etw -m real-time
 
 ## net 
 
-The net command has several uses beyond the below. 
+The net command has several uses. Here are a few! 
 
 ### net view
 One example is the net `net view` command for enumerating shares on a remote system. 

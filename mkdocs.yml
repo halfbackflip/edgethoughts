@@ -27,7 +27,7 @@ theme:
       toggle:
         icon: material/weather-night
         name: Light mode
-      primary: indigo
+      primary: blue grey
       accent: green
 
 markdown_extensions:
