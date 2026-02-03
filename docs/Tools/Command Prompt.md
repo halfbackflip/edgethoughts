@@ -77,7 +77,7 @@ The net command has several uses. Here are a few!
 ### net view
 The net `net view` command for enumerating shares on a remote system. 
 This can be used by both a threat actor for [File and Directory Discovery](https://attack.mitre.org/techniques/T1083/).
-From a defensive perspective it can be useful to monitor for these commands or use them to discover file shares to understand
+From a defensive perspective it can be useful to monitor for these commands or to discover file shares to understand
 where a threat actor may have moved laterally. 
 
 Enumerate shares on a remote system.
