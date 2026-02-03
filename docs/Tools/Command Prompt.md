@@ -62,8 +62,20 @@ pktmon start --etw -m real-time
 
 The net command has several uses. Here are a few! 
 
+### Cheat Sheet
+
+| **Command** | **Description** |
+| --------------|-------------------|
+| `net localgroup administrators` | List of every group with an admin account | 
+| `net start` | See every service running on a system |
+| `net user <username>` | View a given user information |
+| `net use` | Lists all mapped network shares |
+| `net view \\<computer or ip address>` | Lists all shares on a remote host |
+| `net view /domain:<blah>` | Lists all systems registered with a given domain |
+| `net user /domain` | Lists all users for a given domain |
+
 ### net view
-One example is the net `net view` command for enumerating shares on a remote system. 
+The net `net view` command for enumerating shares on a remote system. 
 This can be used by both a threat actor for [File and Directory Discovery](https://attack.mitre.org/techniques/T1083/).
 From a defensive perspective it can be useful to monitor for these commands or use them to discover file shares to understand
 where a threat actor may have moved laterally. 
