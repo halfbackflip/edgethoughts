@@ -4,25 +4,28 @@
 Memory is valuable forensic artifact which can hold running processes, network connections, loaded executables, logged in users, recent commands, injected code, encryption keys, passwords and more. Memory forensics are essential for detecting fileless malware, which is malware which exists only as in memory, operating without an executable and leaving minimal footprint on disk. 
 
 Random Access Memory (RAM) is usually the focus of memory acquisition. RAM is divided into two areas:
+
 * Kernel Space: Operating system and low-level services, i.e. device drivers.
 * User Space: Processes launched by the user or applications. 
 
 User space processes are particularly crucial. This memory contains the following areas:
+
 * Stack: Stores emporary data such as function arguments and return addresses. It expands and contracts as functions are called and returned.
 * Heap: Used for dynamic memory allocation during runtime, such as objects.
 * Executable: Holds code or instructions the CPU executes.
 * Data sections: Stores global variables and data the executable requires.
 
 Types of memory dumps generally include:
+
 * Full: Captures all RAM, including user and kernel space.
 * Process Dump: Captures the memory of a singular process.
 * Pagefile / Swap Analysis: Systems offload some memory content to disk when RAM is full. On Windows, this is stored in pagefile.sys, and on Linux, in a swapfile. These files can be analysed further. 
 
 Windows contains some memory artifacts which can be acquired if the system has been put to sleep or powered off. 
 
-%SystemDrive%\hiberfil.sys - Created when a computer has been put to sleep.
-%SystemRoot%\pagefile.sys - Contains infrequently accessed memory objects from RAM; stored physically in this file.
-%SystemRoot%\MEMORY - Default location where memory dumps are stored after system failures, i.e. BSOD. 
+* `%SystemDrive%\hiberfil.sys` Created when a computer has been put to sleep.
+* `%SystemRoot%\pagefile.sys` Contains infrequently accessed memory objects from RAM; stored physically in this file.
+* `%SystemRoot%\MEMORY` Default location where memory dumps are stored after system failures, i.e. BSOD. 
 
 ## Acquisition
 Dues to its volatile nature, memory is often the first evidence acquired in a forensics investigation. Tools used to acquire memory include:
@@ -56,8 +59,9 @@ Attackers will often use anti-forensic techniques to hid their presence in memor
 [Volatiltiy](https://volatilityfoundation.org/the-volatility-framework/) is a memory analysis program written in python. This is an industry standard tool for memory analysis. 
 
 Here are some cheat sheet commands below. Note: these commands apply to version 3 only. Version 2 was deprecated in May 2025.
-| **Command** | **Description** |
-| --------------|-------------------|
+
+| Command | Description |
+|---|---|
 | `python3 vol.py -h` | volatility help menu | 
 | `python3 vol.py -f "<filepath>" windows.info` | Retrieves memory profile /symbols from a windows memory dump | 
 | `python3 vol.py -f "<filepath>" windows.plist` | Retrieves windows processes | 
