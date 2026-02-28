@@ -68,4 +68,7 @@ Here are some cheat sheet commands below. Note: these commands apply to version 
 | `python3 vol.py -f "<filepath>" windows.pstree` | Lists windows processes in tree view | 
 | `python3 vol.py -f "<filepath>" windows.pstree` | Scans windows processes | 
 | `python3 vol.py -f "<filepath>" windows.cmdline` | Lists windows commandlines | 
-| `python3 vol.py -f "<filepath>" windows.handles --pid <PID>` | Lists file handles for a given process | 
+| `python3 vol.py -f "<filepath>" windows.handles --pid <PID>` | Lists file handles for a given process |
+| `python3 vol -f "<filepath>"  windows.registry.scheduledtasks` | Plugin for listing all the scheduled tasks. | 
+| `python3 vol -f "<filepath>"  windows.registry.printkey.PrintKey --key "Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree"` | Dumps the windows registry scheduled tasks. |
+| `python3 vol -f "<filepath>"  windows.registry.printkey.PrintKey --key "Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{99DAEE12-24B5-4495-98C9-CE7302EF91ZA}"` | Dumps a specific scheduled task SID. | 
