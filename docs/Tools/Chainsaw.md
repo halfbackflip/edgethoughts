@@ -2,6 +2,9 @@
 
 Chainsaw is one of my favorite tools. It can search through various Windows forensics artifacs quickly. One of the most basic use cases is searching Windows Event logs for keywords. Chainsaw also supports Sigma and can match on an entire folder of Sigma rules when hunting through logs. 
 
+The tool can be downloaded here:
+[https://github.com/WithSecureLabs/chainsaw](https://github.com/WithSecureLabs/chainsaw)
+
 | **Command** | **Description** |
 | --------------|-------------------|
 | `chainsaw search --skip-errors "powershell.exe"` | Search all logs in the current directory for powershell.exe | 
