@@ -83,21 +83,21 @@ Filter the web datamodel by category; searching for specific ipv4 addresses.
 by _time, Web.action, Web.user, Web.category, Web.bytes_in, Web.bytes_out, Web.dest, Web.dest_port, Web.http_method, Web.url,Web.user_bunit, index, sourcetype
 ```
 
-# Nework Traffic 
+### Nework Traffic Datamodel
 Search for a specific source ipv4 address.
 ```
 | tstats summariesonly=t fillnull_value="MISSING" count from datamodel=Network_Traffic.All_Traffic where All_Traffic.src IN ("202.63.218.19","69.42.81.14","35.81.84.184","54.215.84.169","115.211.28.95","79.106.137.115","177.155.134.68") by All_Traffic.src, All_Traffic.dest, All_Traffic.action, All_Traffic.dest_port, All_Traffic.bytes, sourcetype
 | sort -count
 ```
 
-# Network Sessions
+### Network Sessions Datamodel
 Search for network sessions filtered by given source/destination ipv4 addresses.
 ```
 | tstats summariesonly=t fillnull_value="MISSING" count from datamodel=Network_Sessions.All_Sessions where All_Sessions.src_ip IN (foo>,<bar>) by All_Sessions.src_ip, All_Sessions.dest_ip, All_Sessions.tag, All_Sessions.user, sourcetype
 | sort -count
 ```
 
-# File hashes 
+### File hashes Datamodel 
 Search the file hashes datamodel for a given range of hashes
 ```
 | tstats summariesonly=t fillnull_value="MISSING" count from datamodel=File_Hashes where File_Hashes.file_hash IN (foo>,<bar>) by File_Hashes.app, File_Hashes.file_hash, File_Hashes.file_name, File_Hashes.tag, File_Hashes.user, File_Hashes.user_bunit, sourcetype
