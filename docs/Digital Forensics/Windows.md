@@ -72,6 +72,68 @@ Read the DNS hosts file
 Get-Content "C:\Windows\System32\drivers\etc\hosts"
 ```
 
+## Get-WinEvent
+Get-WinEvent is a powershell module for querying windows event logs available on Windows Server 2008 and later. 
+Note: Get-EventLog is a legacy powershell module with limited capability.
+
+List available window event logs.
+```powershell
+Get-WinEvent -ListLog * | Select-Object LogName, RecordCount, IsClassicLog, IsEnabled, LogType | Format-Table -AutoSize
+```
+
+List the associated log providers for each log. 
+```powershell
+Get-WinEvent -ListProvider * | Format-Table -AutoSize
+```
+
+Retrieve the first 100 events from the Security Log.
+```powershell
+Get-WinEvent -LogName 'Security' -MaxEvents 100 | Select-Object TimeCreated, ID, ProviderName, LevelDisplayName, Message | Format-Table -AutoSize
+```
+
+Retrieve the first 100 events from a local windows event log.
+```powershell
+Get-WinEvent -Path '<PATH>' -MaxEvents 100 | Select-Object TimeCreated, ID, ProviderName, LevelDisplayName, Message | Format-Table -AutoSize
+```
+
+Filtering the security log to search for failed and successful logon events
+```powershell
+Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4624,4625} | Select-Object TimeCreated, ID, ProviderName, LevelDisplayName, Message | Format-Table -AutoSize
+```
+
+Filtering the security log to search for failed and sucessful logon events from May 01 to June 01 2025. 
+```powershell
+$startDate = (Get-Date -Year 2025 -Month 5 -Day 01).Date
+$endDate   = (Get-Date -Year 2025 -Month 6 -Day 01).Date
+Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4624,4625; StartTime=$startDate; EndTime=$endDate} | Select-Object TimeCreated, ID, ProviderName, LevelDisplayName, Message | Format-Table -AutoSize
+```
+
+Filtering the security log to search for failed and sucessful logon type 10 (RDP) events using an xml filter. 
+```powershell
+$Query = @"
+<QueryList>
+  <Query Id="0" Path="Security">
+    <Select Path="Security">
+      *[System[(EventID=4624 or EventID=4625)]]
+      and
+      *[EventData[Data[@Name='LogonType']='10']]
+    </Select>
+  </Query>
+</QueryList>
+"@
+Get-WinEvent -FilterXML $Query | Select-Object TimeCreated, ID, ProviderName, LevelDisplayName, Message | Format-Table -AutoSize
+```
+
+Filtering the security log to search for failed and sucessful logon type 10 (RDP) events using an xpath filter. 
+```powershell
+Get-WinEvent -LogName Security -FilterXPath "*[System[(EventID=4624 or EventID=4625)] and EventData[Data[@Name='LogonType']='10']]" | Select-Object TimeCreated, ID, ProviderName, LevelDisplayName, Message | Format-Table -AutoSize
+```
+
+Filtering the security log to search for 4625 events where the SubjectUserSid is S-1-5-18. 
+```powershell
+Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4625} | Where-Object {$_.Properties[0].Value -like "S-1-5-18"} | Format-List
+```
+
 ## Startup
 <TODO>
 
