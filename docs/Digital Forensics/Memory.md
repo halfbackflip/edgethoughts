@@ -67,8 +67,24 @@ Here are some cheat sheet commands below. Note: these commands apply to version 
 | `python3 vol.py -f "<filepath>" windows.plist` | Retrieves windows processes | 
 | `python3 vol.py -f "<filepath>" windows.pstree` | Lists windows processes in tree view | 
 | `python3 vol.py -f "<filepath>" windows.pstree` | Scans windows processes | 
-| `python3 vol.py -f "<filepath>" windows.cmdline` | Lists windows commandlines | 
+| `python3 vol.py -f "<filepath>" windows.cmdline` | Lists windows commandlines |
+| `python3 vol.py -f "<filepath>" windows.dumpfiles` | Dumps cached file contents. | 
+| `python3 vol.py -f "<filepath>" windows.mftscan.ADS` | Searches for alternate data streams within the mft | 
 | `python3 vol.py -f "<filepath>" windows.handles --pid <PID>` | Lists file handles for a given process |
 | `python3 vol -f "<filepath>"  windows.registry.scheduledtasks` | Plugin for listing all the scheduled tasks. | 
 | `python3 vol -f "<filepath>"  windows.registry.printkey.PrintKey --key "Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tree"` | Dumps the windows registry scheduled tasks. |
 | `python3 vol -f "<filepath>"  windows.registry.printkey.PrintKey --key "Microsoft\Windows NT\CurrentVersion\Schedule\TaskCache\Tasks\{99DAEE12-24B5-4495-98C9-CE7302EF91ZA}"` | Dumps a specific scheduled task SID. | 
+
+Example of using volatility to:
+1. List all the running processes
+2. Identify the browser, in this case msedge.exe
+3. Use Volatility to dump the raw memory of msedge.exe to a file
+4. Search the file for text strings containing that url
+
+Note: browser memory dumps can hold sensitive data—such as active session tokens, recent web requests, or typed URLs—strictly in ,memory.
+```
+vol -f $file windows.pslist > windows_pslist.txt
+cat windows_pslist.txt | grep "msedge.exe"
+python3 vol.py -f mydump.vmem -o /path/to/output/dir windows.memmap --pid 1233 --dump
+strings msedge.exe.dmp | grep -i "https://"'
+```

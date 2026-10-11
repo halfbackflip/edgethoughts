@@ -95,3 +95,28 @@ Print folder names to the console.
 ```batch
 (net view \\<computer or ip address>) | % { if($_.IndexOf(' Disk ') -gt 0){ $_.Split('  ')[0] } }
 ```
+
+## scp
+scp is built into Windows 10 & Windows 11 as part of the OpenSSH client.
+Here are some handy scp commands I often use.
+
+
+Copy a file over ssh to a local destination
+```
+scp username@remote_host:/home/username/Desktop/foobar.txt "C:\Users\username\Downloads\foobar.txt"
+```
+
+Copy a file to a remote destination
+```
+scp C:\path\to\localfile.txt username@remote_host:/path/to/destination
+```
+
+Copy a folder recursively
+```
+scp -r C:\path\to\localfolder username@remote_host:/path/to/destination
+```
+
+Use scp with an ssh flag
+```
+scp -i "C:\Users\username\.ssh\id_rsa" username@remote_host:/home/username/Desktop/foobar.txt "C:\Users\username\Downloads\foobar.txt"
+```
