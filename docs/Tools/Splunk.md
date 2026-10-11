@@ -5,11 +5,11 @@ This section contains some snippets of Splunk commands.
 | **Command** | **Description** |
 | --------------|-------------------|
 |`datamodelsimple`| List all data models |
-| `\| datamodel Change`| Lists the fields in the Change datamodel |
-|`\| datamodel Network_Traffic summariesonly=true search`| Search the Network Traffic datamodel |
-|`\| tstats prestats=true summariesonly=true count from datamodel=Network_Traffic.All_Traffic by index sourcetype \| stats count by index sourcetype`| Lists the indexes and sourcetypes in the Network_Traffic datamodel|
-|`\| datamodel Network_Traffic summariesonly=true search sourcetype=aws:cloudwatchlogs:vpcflow`| Search specific datamodel sourcetypes|
-|`\| datamodel Vulnerabilities summariesonly=true search \| timechart span=1h count`| Create a timechart from a datamodel|
+| `│ datamodel Change`| Lists the fields in the Change datamodel|
+|`│ datamodel Network_Traffic summariesonly=true search`| Search the Network Traffic datamodel |
+|`│ tstats prestats=true summariesonly=true count from datamodel=Network_Traffic.All_Traffic by index sourcetype \| stats count by index sourcetype`| Lists the indexes and sourcetypes in the Network_Traffic datamodel|
+|`│ datamodel Network_Traffic summariesonly=true search sourcetype=aws:cloudwatchlogs:vpcflow`| Search specific datamodel sourcetypes|
+|`│ datamodel Vulnerabilities summariesonly=true search \| timechart span=1h count`| Create a timechart from a datamodel|
 |`tstats count where sourcetype="<foo>" by sourcetype index _time \|  timechart count by index `| Create a timechart for counting events by index.|
 
 ## Datamodel SPL Baselining

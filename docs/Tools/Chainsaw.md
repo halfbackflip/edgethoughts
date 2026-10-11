@@ -1,6 +1,6 @@
 # Chainsaw
 
-Chainsaw is one of my favorite tools. It can search through various Windows forensics artifacs quickly. One of the most basic use cases is searching Windows Event logs for keywords. Chainsaw also supports Sigma and can match on an entire folder of Sigma rules when hunting through logs. 
+Chainsaw can search through various Windows forensics artifacs quickly. One of the most basic use cases is searching Windows Event logs for keywords. Chainsaw also supports Sigma and can match on an entire folder of Sigma rules when hunting through logs. 
 
 The tool can be downloaded here:
 [https://github.com/WithSecureLabs/chainsaw](https://github.com/WithSecureLabs/chainsaw)
